@@ -1,5 +1,8 @@
 package com.zheng.common.util;
 
+
+import org.apache.commons.lang.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,20 +39,11 @@ public class StringUtil {
     }
 
     /**
-     * 驼峰转下划线(简单写法，效率低于{@link #humpToLine2(String)})
-     * @param str
-     * @return
-     */
-    public static String humpToLine(String str) {
-        return str.replaceAll("[A-Z]", "_$0").toLowerCase();
-    }
-
-    /**
      * 驼峰转下划线,效率比上面高
      * @param str
      * @return
      */
-    public static String humpToLine2(String str) {
+    public static String humpToLine(String str) {
         Matcher matcher = humpPattern.matcher(str);
         StringBuffer sb = new StringBuffer();
         while (matcher.find()) {
@@ -57,6 +51,47 @@ public class StringUtil {
         }
         matcher.appendTail(sb);
         return sb.toString();
+    }
+
+    /**
+     * 驼峰转下划线(简单写法，效率低于{@link #humpToLine(String)})
+     * @param str
+     * @return
+     */
+    public static String humpToLine2(String str) {
+        return str.replaceAll("[A-Z]", "_$0").toLowerCase();
+    }
+
+    /**
+     * 首字母转小写
+     * @param s
+     * @return
+     */
+    public static String toLowerCaseFirstOne(String s) {
+        if (StringUtils.isBlank(s)) {
+            return s;
+        }
+        if (Character.isLowerCase(s.charAt(0))) {
+            return s;
+        } else {
+            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
+    }
+
+    /**
+     * 首字母转大写
+     * @param s
+     * @return
+     */
+    public static String toUpperCaseFirstOne(String s) {
+        if (StringUtils.isBlank(s)) {
+            return s;
+        }
+        if (Character.isUpperCase(s.charAt(0))) {
+            return s;
+        } else {
+            return (new StringBuffer()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
     }
 
     /**

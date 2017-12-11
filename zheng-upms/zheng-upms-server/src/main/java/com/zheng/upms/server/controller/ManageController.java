@@ -27,7 +27,7 @@ import java.util.List;
 @Api(value = "后台管理", description = "后台管理")
 public class ManageController extends BaseController {
 
-	private static Logger _log = LoggerFactory.getLogger(ManageController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ManageController.class);
 
 	@Autowired
 	private UpmsSystemService upmsSystemService;
@@ -46,10 +46,11 @@ public class ManageController extends BaseController {
 		modelMap.put("upmsSystems", upmsSystems);
 		// 当前登录用户权限
 		Subject subject = SecurityUtils.getSubject();
-		UpmsUser upmsUser = (UpmsUser) subject.getPrincipal();
+		String username = (String) subject.getPrincipal();
+		UpmsUser upmsUser = upmsApiService.selectUpmsUserByUsername(username);
 		List<UpmsPermission> upmsPermissions = upmsApiService.selectUpmsPermissionByUpmsUserId(upmsUser.getUserId());
 		modelMap.put("upmsPermissions", upmsPermissions);
-		return "/manage/index";
+		return "/manage/index.jsp";
 	}
 
 }

@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 角色service实现
- * Created by shuzheng on 2017/2/6.
- */
+* UpmsRoleService实现
+* Created by shuzheng on 2017/3/20.
+*/
 @Service
 @Transactional
 @BaseService
 public class UpmsRoleServiceImpl extends BaseServiceImpl<UpmsRoleMapper, UpmsRole, UpmsRoleExample> implements UpmsRoleService {
 
-    private static Logger _log = LoggerFactory.getLogger(UpmsRoleServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpmsRoleServiceImpl.class);
 
     @Autowired
     UpmsRoleMapper upmsRoleMapper;
